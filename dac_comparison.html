@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>DAC Comparison</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension bierner.markdown-checkbox */
+.contains-task-list {
+    padding-left: 0;
+}
+
+.contains-task-list li {
+    margin-left: 24px;
+}
+
+.contains-task-list .task-list-item {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.contains-task-list .contains-task-list {
+    padding-left: 20px;
+} 
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th,
+td {
+  border: 1px solid #d0d7de;
+  padding: 4px 5px;
+  vertical-align: top;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Keep the notes column wider for handwriting space. */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 2.25ch;
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+  width: 22%;
+}
+
+@media print {
+  @page {
+    size: letter landscape;
+    margin: 0.1in;
+  }
+
+  body {
+    font-size: 10px;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  h1 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    line-height: 1.1;
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    margin: 0;
+  }
+
+  th,
+  td {
+    padding: 3px 4px;
+    line-height: 1.2;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  th *,
+  td * {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+}
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;vscode&quot;,&quot;lightModeTheme&quot;:&quot;vscode&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<h1 id="dac-comparison">DAC Comparison</h1>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Artist</th>
+<th>Album</th>
+<th>Track</th>
+<th>Primary Attribute</th>
+<th>What to Listen For</th>
+<th>My Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>The Police</td>
+<td><em>Every Breath You Take: The Singles</em></td>
+<td><strong>Wrapped Around Your Finger</strong></td>
+<td>Stereo imaging &amp; depth</td>
+<td>Precise instrument placement; front-to-back layering</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>The Police</td>
+<td><em>Reggatta De Blanc</em></td>
+<td><strong>Walking on the Moon</strong></td>
+<td>Bass definition</td>
+<td>Bass pitch, decay, and separation from the rest of the mix</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>The Cars</td>
+<td><em>Heartbeat City</em></td>
+<td><strong>Drive</strong></td>
+<td>Vocal reproduction</td>
+<td>Vocal texture, center image, smoothness</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>David Sanborn</td>
+<td><em>A Change Of Heart</em></td>
+<td><strong>A Change Of Heart</strong></td>
+<td>Harmonic texture</td>
+<td>Natural saxophone tone; smooth vs. edgy upper midrange</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Flim &amp; the BB's</td>
+<td><em>Tricycle</em></td>
+<td><strong>Tricycle</strong></td>
+<td>Transients &amp; imaging</td>
+<td>Attack of percussion; precise localization</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Rush</td>
+<td><em>Moving Pictures</em></td>
+<td><strong>Tom Sawyer</strong></td>
+<td>Complex-mix separation</td>
+<td>Whether drums, bass, guitar, and synthesizers remain distinct</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>U2</td>
+<td><em>The Joshua Tree</em></td>
+<td><strong>With or Without You</strong></td>
+<td>Layering &amp; ambience</td>
+<td>Sustained textures and reverberation around the vocal</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Peter Gabriel</td>
+<td><em>Shaking the Tree</em></td>
+<td><strong>Shaking the Tree</strong></td>
+<td>Spatial layering</td>
+<td>Relative position of vocals and percussion</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Candy Dulfer</td>
+<td><em>Saxuality</em></td>
+<td><strong>Saxuality</strong></td>
+<td>Transient response</td>
+<td>Sax attack, percussion timing, rhythmic precision</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Sting</td>
+<td><em>Fields Of Gold (The Best Of Sting 1984–1994)</em></td>
+<td><strong>Fields of Gold</strong></td>
+<td>Naturalness</td>
+<td>Vocal timbre and acoustic instrumental textures</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>U2</td>
+<td><em>Achtung Baby</em></td>
+<td><strong>One</strong></td>
+<td>Low-level detail</td>
+<td>Quiet background information and vocal nuance</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>The Police</td>
+<td><em>Zenyatta Mondatta</em></td>
+<td><strong>Don't Stand So Close to Me</strong></td>
+<td>Rhythm &amp; timing</td>
+<td>Bass/drum interaction and rhythmic articulation</td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>The Cure</td>
+<td><em>Kiss Me, Kiss Me, Kiss Me</em></td>
+<td><strong>Just Like Heaven</strong></td>
+<td>High-frequency texture</td>
+<td>Guitar shimmer, cymbals, synth textures</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>The Psychedelic Furs</td>
+<td><em>Mirror Moves</em></td>
+<td><strong>The Ghost in You</strong></td>
+<td>Ambient information</td>
+<td>Synth decay, reverberation, spatial atmosphere</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Johnny Clegg &amp; Savuka</td>
+<td><em>Shadow Man</em></td>
+<td><strong>Asimbonanga</strong></td>
+<td>Percussion &amp; soundstage</td>
+<td>Instrument separation and rhythmic detail</td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Dave Koz</td>
+<td><em>Dave Koz</em></td>
+<td><strong>Castle of Dreams</strong></td>
+<td>Saxophone timbre</td>
+<td>Smoothness, body, and high-frequency texture</td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>The English Beat</td>
+<td><em>Special Beat Service</em></td>
+<td><strong>Save It for Later</strong></td>
+<td>Bass &amp; rhythm</td>
+<td>Bass guitar articulation and rhythmic drive</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>UB40</td>
+<td><em>Rat In The Kitchen</em></td>
+<td><strong>Rat in Mi Kitchen</strong></td>
+<td>Low-frequency weight</td>
+<td>Bass fullness vs. definition and control</td>
+<td></td>
+</tr>
+<tr>
+<td>19</td>
+<td>Candy Dulfer</td>
+<td><em>Sax-A-Go-Go</em></td>
+<td><strong>Sax-A-Go-Go</strong></td>
+<td>Dynamics</td>
+<td>Changes in musical intensity; percussion impact</td>
+<td></td>
+</tr>
+<tr>
+<td>20</td>
+<td>The B-52's</td>
+<td><em>Cosmic Thing</em></td>
+<td><strong>Love Shack</strong></td>
+<td>Complex mix &amp; punch</td>
+<td>Separation of vocals/instruments in a busy, energetic mix</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+            
+            
+        </body>
+        </html>
