@@ -1,0 +1,8 @@
+# Extra M: folders to quarantine with compare_full_albums_e_vs_m.py --apply (one path per line).
+# Moon Glow whole-disc image + cue and its MP3 conversion; the E: copy was removed in favour of the 20 split tracks.
+M:\MusicFlac\Secular\Goodman, Benny\1936 Moon Glow
+M:\MusicMp3\Secular\MusicFromFlac\Goodman, Benny\1936 Moon Glow
+# MP3s MediaMonkey converted from FLACs already being quarantined, but which the script could not pair one-to-one:
+# Medazzaland has two FLAC copies whose tracks 1 and 6 are within 1 s; Nasca Fantasy tracks 5 and 7 are 2-3 s longer as MP3.
+M:\MusicMp3\Secular\MusicFromFlac\Duran Duran\1997 Medazzaland
+M:\MusicMp3\Secular\MusicFromFlac\Kodo & Isao Tomita\1994 Nasca Fantasy

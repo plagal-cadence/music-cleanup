@@ -11,7 +11,7 @@ FOLDERS = [
     r"M:\MusicFromCDsRussFlac\_Classical",
 ]
 
-OUTPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "list_albums.csv")
+OUTPUT_CSV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "01-inventory.csv")
 
 
 def get_flac_tags(album_path):
